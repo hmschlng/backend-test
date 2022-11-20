@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<button id="testBtn">
+		test1
+	</button>
+	<h3 id="result"></h3>
+	<script>
+		document.getElementById("testBtn").addEventListener("click", () => {
+			let result = fetch("//localhost:9999/house/sido")
+			.then(response => response.json())
+			.then((data) => {
+				let txt = "";
+				for(sido of data) {
+					console.log(sido);
+					txt.append(sido.code + "/" + sido.name);
+				}
+				document.getElementById("result").innerText = txt;
+			});
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+package com.ssafy.backtest.house;
+
+public class HouseController {
+
+}

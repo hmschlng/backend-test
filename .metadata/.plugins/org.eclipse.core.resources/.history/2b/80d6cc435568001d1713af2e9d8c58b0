@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.home.apt.model.mapper.AptMapper">
+
+	<resultMap type="aptDto" id="aptDto">
+		<result column="roadName" property="roadName" />
+		<result column="roadNameBonbun" property="roadNameBonbun" />
+		<result column="roadNameBubun" property="roadNameBubun" />
+		<result column="roadNameSeq" property="roadNameSeq" />
+		<result column="roadNameBasementCode"
+			property="roadNameBasementCode" />
+		<result column="roadNameCode" property="roadNameCode" />
+		<result column="dong" property="dong" />
+		<result column="bonbun" property="bonbun" />
+		<result column="bubun" property="bubun" />
+		<result column="sigunguCode" property="sigunguCode" />
+		<result column="eubmyundongCode" property="eubmyundongCode" />
+		<result column="dongCode" property="dongCode" />
+		<result column="landCode" property="landCode" />
+		<result column="apartmentName" property="apartmentName" />
+		<result column="jibun" property="jibun" />
+		<result column="lng" property="lng" />
+		<result column="lat" property="lat" />
+		<result column="no" property="no" />
+		<result column="dealAmount" property="dealAmount" />
+		<result column="dealYear" property="dealYear" />
+		<result column="dealMonth" property="dealMonth" />
+		<result column="dealDay" property="dealDay" />
+		<result column="area" property="area" />
+		<result column="floor" property="floor" />
+		<result column="cancelDealType" property="cancelDealType" />
+	</resultMap>
+
+	<resultMap type="apt" id="apt">
+		<result column="code" property="code" />
+		<result column="name" property="name" />
+	</resultMap>
+
+	<select id="selectSido" resultMap="apt">
+		select *
+		from sidocode
+		order by code
+	</select>
+
+	<select id="selectGugun" parameterType="String" resultMap="apt">
+		select *
+		from guguncode
+		where code like concat(#{code}, '%')
+		and name is not null
+		order by code
+	</select>
+
+	<select id="selectDong" parameterType="String" resultMap="apt">
+		select
+		*
+		from dongcode
+		where code like concat(#{code}, '%') and name is not
+		null
+		order by code
+	</select>
+
+	<select id="selectApt" parameterType="map" resultMap="aptDto">
+		select *
+		from houseinfo hi left join housedeal hd
+		on hi.aptCode = hd.aptCode
+		where hi.dongCode = #{code}
+		and hd.dealYear = #{year}
+		and hd.dealMonth = #{month}
+	</select>
+
+</mapper>

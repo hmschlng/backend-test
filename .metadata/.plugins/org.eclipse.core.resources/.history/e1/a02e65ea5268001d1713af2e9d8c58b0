@@ -1,0 +1,5 @@
+package com.ssafy.backtest.house.model.service;
+
+public interface HouseService {
+
+}

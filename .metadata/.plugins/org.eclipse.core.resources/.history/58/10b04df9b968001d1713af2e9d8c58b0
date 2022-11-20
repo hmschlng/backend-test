@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.backtest.house.model.mapper.HouseMapper">
+
+	<!-- 시도 목록 -->
+	<resultMap type="areaCode" id="sidoCode">
+		<result column="sidoCode" property="code"/>
+		<result column="sidoName" property="name"/>
+	</resultMap>
+
+	<!-- 시구군 목록 -->
+	<resultMap type="areaCode" id="gugunCode">
+		<result column="gugunCode" property="code"/>
+		<result column="gugunName" property="name"/>
+	</resultMap>
+	
+	<!-- 동 목록 -->
+	<resultMap type="areaCode" id="gugunCode">
+		<result column="gugunCode" property="code"/>
+		<result column="gugunName" property="name"/>
+	</resultMap>
+	
+	
+	<select id="getSidoList" resultMap="sidoCode">
+		select left(sidoCode,2) sidoCode, sidoName
+		from sidocode
+		order by sidoCode
+	</select>
+	
+	<select id="getGugunList" parameterType="string" resultMap="gugunCode">
+		select left(gugunCode,5) gugunCode, gugunName
+		from guguncode
+		where left(gugunCode,2) = #{sidoCode}
+		order by gugunCode
+	</select>
+	
+	<select id="getDongList" parameterType="string" resultMap="dongCode">
+		select left(gugunCode,5) gugunCode, gugunName
+		from guguncode
+		where left(gugunCode,2) = #{sidoCode}
+		order by gugunCode
+	</select>
+
+</mapper>

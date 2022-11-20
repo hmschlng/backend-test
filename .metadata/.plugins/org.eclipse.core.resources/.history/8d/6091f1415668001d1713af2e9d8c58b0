@@ -1,0 +1,13 @@
+package com.ssafy.backtest.house.model.mapper;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import com.ssafy.backtest.house.model.dto.AreaCode;
+
+@Mapper
+public interface HouseMapper {
+
+	public List<AreaCode> getSidoCode() throws SQLException;
+
+}
