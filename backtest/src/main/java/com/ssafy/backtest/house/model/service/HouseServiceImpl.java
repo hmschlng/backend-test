@@ -36,10 +36,11 @@ public class HouseServiceImpl implements HouseService {
 	@Override
 	public List<Apt> getAptList(String areaCode, String dealYm) throws Exception {
 		Map<String, String> map = new HashMap<>();
-		map.put("areaCode", areaCode);
+		map.put("areaCode", areaCode + "%");
 		map.put("year", dealYm.substring(0, 4));
 		map.put("month", dealYm.substring(4));
-		
+		System.out.println(map.get("year"));
+		System.out.println(map.get("month"));
 		return sqlSession.getMapper(HouseMapper.class).selectAptList(map);
 	}
 
