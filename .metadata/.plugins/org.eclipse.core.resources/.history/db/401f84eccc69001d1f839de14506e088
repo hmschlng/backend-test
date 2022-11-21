@@ -1,0 +1,12 @@
+package com.ssafy.backtest.board.model.service;
+
+import org.springframework.stereotype.Service;
+
+import com.ssafy.backtest.board.model.dto.Board;
+
+@Service
+public interface BoardService {
+
+	Board getArticle(String category, int no) throws Exception;
+
+}

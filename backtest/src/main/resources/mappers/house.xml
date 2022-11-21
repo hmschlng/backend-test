@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.backtest.house.model.mapper.HouseMapper">
+
+	<select id="selectSidoList" resultType="areaCode">
+		select code, name
+		from sidocode
+		order by code
+	</select>
+	
+	<select id="selectGugunList" parameterType="string" resultType="areaCode">
+		select code, name
+		from guguncode
+		where left(code,2) = #{sidoCode}
+		order by code
+	</select>
+	
+	<select id="selectDongList" parameterType="string" resultType="areaCode">
+		select code, name
+		from dongcode
+		where left(code,5) = #{code}
+		and name is not null
+		order by code
+	</select>
+
+	<select id="selectAptList" parameterType="map" resultType="apt">
+		select *
+		from houseinfo hi left join housedeal hd
+		on hi.aptCode = hd.aptCode
+		where hi.dongCode like #{areaCode}
+		and hd.dealYear = #{year}
+		and hd.dealMonth = #{month}
+	</select>
+	
+</mapper>

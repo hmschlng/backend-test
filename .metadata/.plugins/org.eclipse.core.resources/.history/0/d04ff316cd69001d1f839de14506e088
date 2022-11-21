@@ -1,0 +1,34 @@
+package com.ssafy.backtest.board.model.service;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.ssafy.backtest.board.model.dto.Board;
+import com.ssafy.backtest.board.model.mapper.BoardMapper;
+
+public class BoardServiceImpl implements BoardService {
+
+	@Autowired
+	private SqlSession sqlSession;
+	
+	@Override
+	public Board getArticle(String category, int no) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("category", category);
+		map.put("articleNo", no);
+		return sqlSession.getMapper(BoardMapper.class).getArticle(map);
+	}
+
+	@Override
+	public boolean deleteArticle(String category, int no) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("category", category);
+		map.put("articleNo", no);
+		
+		return sqlSession.getMapper(BoardMapper.class).deleteArticle(map);
+	}
+
+}

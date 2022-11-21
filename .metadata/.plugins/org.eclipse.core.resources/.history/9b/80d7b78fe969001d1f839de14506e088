@@ -1,0 +1,6 @@
+package com.ssafy.backtest.member.model.service;
+
+@Service
+public class MemberServiceImpl implements MemberService {
+
+}

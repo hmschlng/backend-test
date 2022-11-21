@@ -13,11 +13,8 @@ import com.ssafy.backtest.house.model.dto.AreaCode;
 public interface HouseMapper {
 
 	public List<AreaCode> selectSidoList() throws SQLException;
-
 	public List<AreaCode> selectGugunList(String sidoCode) throws SQLException;
-
 	public List<AreaCode> selectDongList(String gugunCode) throws SQLException;
-
 	public List<Apt> selectAptList(Map<String, String> map) throws SQLException;
 
 }
