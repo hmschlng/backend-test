@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `board` (
   PRIMARY KEY (`article_no`),
   CONSTRAINT `board_to_member_id_fk`
     FOREIGN KEY (`member_id`)
-    REFERENCES member (`email_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+    REFERENCES member (`email_id`) ON DELETE CASCADE,
   CONSTRAINT `board_to_member_nickname_fk`
     FOREIGN KEY (`nickname`)
     REFERENCES member (`nickname`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `comment` (
   `register_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` TIMESTAMP,
   PRIMARY KEY (`comment_no`),
-   CONSTRAINT `board_to_article_no_fk`
+  CONSTRAINT `board_to_article_no_fk`
     FOREIGN KEY (`article_no`)
     REFERENCES board (`article_no`) ON DELETE CASCADE,
   CONSTRAINT `member_to_comment_id_fk`
