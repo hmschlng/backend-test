@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `board` (
   PRIMARY KEY (`article_no`),
   CONSTRAINT `board_to_member_id_fk`
     FOREIGN KEY (`member_id`)
-    REFERENCES member (`email_id`) ON DELETE CASCADE,
+    REFERENCES member (`email_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `board_to_member_nickname_fk`
     FOREIGN KEY (`nickname`)
     REFERENCES member (`nickname`) ON DELETE CASCADE ON UPDATE CASCADE
