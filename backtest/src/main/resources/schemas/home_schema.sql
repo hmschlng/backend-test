@@ -42,11 +42,42 @@ CREATE TABLE IF NOT EXISTS `board` (
   `hit` INT NULL DEFAULT 0,
   `like` INT NULL DEFAULT 0,
   `register_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` TIMESTAMP,
   PRIMARY KEY (`article_no`),
   CONSTRAINT `board_to_member_id_fk`
     FOREIGN KEY (`member_id`)
     REFERENCES member (`email_id`) ON DELETE CASCADE,
   CONSTRAINT `board_to_member_nickname_fk`
+    FOREIGN KEY (`nickname`)
+    REFERENCES member (`nickname`) ON DELETE CASCADE ON UPDATE CASCADE
+)
+ENGINE = InnoDB
+AUTO_INCREMENT = 1
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+-- 댓글 테이블
+DROP TABLE IF EXISTS comment;
+
+CREATE TABLE IF NOT EXISTS `comment` (
+  `comment_no` INT NOT NULL AUTO_INCREMENT,
+  `article_no` INT NOT NULL,
+  `member_id` VARCHAR(100) NOT NULL,
+  `nickname` VARCHAR(60) NOT NULL,
+  `content` VARCHAR(2000) NOT NULL,
+  `depth` INT NOT NULL DEFAULT 0,
+  `parent_no` INT NOT NULL DEFAULT 0,
+  `like` INT NULL DEFAULT 0,
+  `register_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` TIMESTAMP,
+  PRIMARY KEY (`comment_no`),
+   CONSTRAINT `board_to_article_no_fk`
+    FOREIGN KEY (`article_no`)
+    REFERENCES board (`article_no`) ON DELETE CASCADE,
+  CONSTRAINT `member_to_comment_id_fk`
+    FOREIGN KEY (`member_id`)
+    REFERENCES member (`email_id`) ON DELETE CASCADE,
+  CONSTRAINT `member_to_comment_nickname_fk`
     FOREIGN KEY (`nickname`)
     REFERENCES member (`nickname`) ON DELETE CASCADE ON UPDATE CASCADE
 )
@@ -102,4 +133,3 @@ insert into board(category, member_id, nickname, title, content)
 values('one_on_one', 'kimssafy@ssafy.com', 'soyoon', 'soyoon test one_on_one', "내이름은 김소윤, 레전드지.내이름은 김소윤, 레전드지.내이름은 김소윤, 레전드지.");
 insert into board(category, member_id, nickname, title, content)
 values('one_on_one', 'sbcGOAT@ssafy.com', '대전의레전드', "who's the best? (share)", "Do you know what GOAT means? It's great of all time and it's me!!");
-
