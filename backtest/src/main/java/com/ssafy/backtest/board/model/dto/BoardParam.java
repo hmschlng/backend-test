@@ -7,16 +7,18 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-public class Board {
-	int articleNo;
+public class BoardParam {
 	String category;
-	String memberId;
-	String nickname;
-	String title;
-	String content;
-	int hit;
-	int like;
-	String registerTime;
+	int pgno;
+	int pageSize;
+	int start;
+	String option;
+	String keyword;
+	
+	public BoardParam() {
+		this.category = "share";
+		this.pgno = 1;
+		this.pageSize = 20;
+	}
 }

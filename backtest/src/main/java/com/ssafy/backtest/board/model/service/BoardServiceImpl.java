@@ -1,6 +1,7 @@
 package com.ssafy.backtest.board.model.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ssafy.backtest.board.model.dto.Board;
+import com.ssafy.backtest.board.model.dto.BoardParam;
 import com.ssafy.backtest.board.model.mapper.BoardMapper;
 
 @Service
@@ -16,6 +18,14 @@ public class BoardServiceImpl implements BoardService {
 
 	@Autowired
 	private SqlSession sqlSession;
+	
+	@Override
+	public List<Board> listArticle(Map<String, Object> params) throws Exception {
+		int start = (int)params.get("pgno") == 1 ? 0 : (int)params.get("pgno") - 1 * (int)params.get("pageSize");
+		params.put("start", start);
+		List<Board> list = sqlSession.getMapper(BoardMapper.class).listArticle(params);
+		return list;
+	}
 	
 	@Override
 	public Board getArticle(String category, int no) throws Exception {

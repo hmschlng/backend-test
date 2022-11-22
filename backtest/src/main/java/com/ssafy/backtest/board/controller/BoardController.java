@@ -1,6 +1,8 @@
 package com.ssafy.backtest.board.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.backtest.board.model.dto.Board;
+import com.ssafy.backtest.board.model.dto.BoardParam;
 import com.ssafy.backtest.board.model.service.BoardService;
 
 @RestController
@@ -26,16 +29,24 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 	
-//	@GetMapping("/{category}/{pgno}/{pageSize}/{option}/{keyWord}")
-//	public ResponseEntity<List<Board>> getBoardList(
-//			@PathVariable String category, 
-//			@PathVariable int pgno,
-//			@PathVariable int pageSize,
-//			@PathVariable String option,
-//			@PathVariable String keyWord
-//			) throws Exception {
-//		return null;
-//	}
+	@GetMapping("/{category}/{pgno}/{pageSize}/{option}/{keyword}")
+	public ResponseEntity<List<Board>> getBoardList(
+			@PathVariable String category,
+			@PathVariable int pgno,
+			@PathVariable int pageSize,
+			@PathVariable String option,
+			@PathVariable String keyword
+			) throws Exception {
+		
+		Map<String, Object> params = new HashMap<>();
+		
+		params.put("category", category);
+		params.put("pgno", pgno);
+		params.put("pageSize", pageSize);
+		params.put("option", option);
+		params.put("keyword", keyword);
+		return new ResponseEntity<List<Board>>(boardService.listArticle(params), HttpStatus.OK);
+	}
 	
 	@GetMapping("/view/{category}/{no}")
 	public ResponseEntity<Board> getArticle(

@@ -21,5 +21,5 @@ public class Member {
 	String exitDate;
 	String lastLoginDate;
 	String Status;
-	byte isAdmin;
+	String isAdmin;
 }
