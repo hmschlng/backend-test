@@ -8,19 +8,37 @@
 		<result column="article_no" property="articleNo"/>
 		<result column="category" property="category"/>
 		<result column="member_id" property="memberId"/>
-		<result column="nickname" property="nickName"/>
+		<result column="nickname" property="nickname"/>
 		<result column="title" property="title"/>
 		<result column="content" property="content"/>
 		<result column="hit" property="hit"/>
 		<result column="like" property="like"/>
 		<result column="register_time" property="registerTime"/>
 	</resultMap>
-
-	<select id="getArticle" parameterType="map" resultMap="board">
+	
+	<select id="listArticle" parameterType="boardParam" resultMap="board">
 		select *
 		from board
-		where category = #{category} 
-		and article_no = #{articleNo}
+		where category = #{category}
+		<if test="keyword != null and keyword != ''">
+			<if test="option == 'title'">
+				and title like concat('%', #{keyword}, '%')
+			</if>
+			<if test="option == 'author'">
+				and nickname like concat('%', #{keyword}, '%')
+			</if>
+			<if test="option == 'contents'">
+				and content like concat('%', #{keyword}, '%')
+			</if>
+		</if>
+		order by article_no desc
+		limit #{start}, #{pageSize}
+	</select>
+
+	<select id="getArticle" parameterType="int" resultMap="board">
+		select *
+		from board
+		where article_no = #{articleNo}
 	</select>
 	
 	<insert id="writeArticle" parameterType="board">
@@ -49,10 +67,9 @@
 		and article_no = #{articleNo}
 	</update>
 	
-	<delete id="deleteArticle" parameterType="map">
+	<delete id="deleteArticle" parameterType="int">
 		delete from board
-		where category = #{category}
-		and article_no = #{articleNo};
+		where article_no = #{articleNo};
 	</delete>
 	
 </mapper>

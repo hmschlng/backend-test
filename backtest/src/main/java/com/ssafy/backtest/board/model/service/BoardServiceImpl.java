@@ -1,6 +1,7 @@
 package com.ssafy.backtest.board.model.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ssafy.backtest.board.model.dto.Board;
+import com.ssafy.backtest.board.model.dto.BoardParam;
 import com.ssafy.backtest.board.model.mapper.BoardMapper;
 
 @Service
@@ -16,13 +18,17 @@ public class BoardServiceImpl implements BoardService {
 
 	@Autowired
 	private SqlSession sqlSession;
+
+	@Override
+	public List<Board> listArticle(BoardParam boardParam) throws Exception {
+		int start = boardParam.getPgno() == 1 ? 0 : (boardParam.getPgno() - 1) * boardParam.getPageSize();
+		boardParam.setStart(start);
+		return sqlSession.getMapper(BoardMapper.class).listArticle(boardParam);
+	}
 	
 	@Override
-	public Board getArticle(String category, int no) throws Exception {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("category", category);
-		map.put("articleNo", no);
-		return sqlSession.getMapper(BoardMapper.class).getArticle(map);
+	public Board getArticle(int no) throws Exception {
+		return sqlSession.getMapper(BoardMapper.class).getArticle(no);
 	}
 
 	@Override
@@ -50,11 +56,8 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	@Transactional
-	public boolean deleteArticle(String category, int no) throws Exception {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("category", category);
-		map.put("articleNo", no);
-		return sqlSession.getMapper(BoardMapper.class).deleteArticle(map);
+	public boolean deleteArticle(int no) throws Exception {
+		return sqlSession.getMapper(BoardMapper.class).deleteArticle(no) == 1;
 	}
 	
 }

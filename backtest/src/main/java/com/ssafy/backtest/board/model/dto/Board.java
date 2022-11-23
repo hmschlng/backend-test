@@ -13,7 +13,7 @@ public class Board {
 	int articleNo;
 	String category;
 	String memberId;
-	String nickName;
+	String nickname;
 	String title;
 	String content;
 	int hit;

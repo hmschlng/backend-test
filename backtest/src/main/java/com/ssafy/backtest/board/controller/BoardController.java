@@ -1,6 +1,8 @@
 package com.ssafy.backtest.board.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,9 +15,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.backtest.board.model.dto.Board;
+import com.ssafy.backtest.board.model.dto.BoardParam;
 import com.ssafy.backtest.board.model.service.BoardService;
 
 @RestController
@@ -26,74 +30,54 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 	
-//	@GetMapping("/{category}/{pgno}/{pageSize}/{option}/{keyWord}")
-//	public ResponseEntity<List<Board>> getBoardList(
-//			@PathVariable String category, 
-//			@PathVariable int pgno,
-//			@PathVariable int pageSize,
-//			@PathVariable String option,
-//			@PathVariable String keyWord
-//			) throws Exception {
-//		return null;
-//	}
+	@GetMapping
+	public ResponseEntity<List<Board>> getBoardList(
+			BoardParam boardParam
+			) throws Exception {
+		return new ResponseEntity<List<Board>>(boardService.listArticle(boardParam), HttpStatus.OK);
+	}
 	
-	@GetMapping("/view/{category}/{no}")
-	public ResponseEntity<Board> getArticle(
-			@PathVariable String category, 
+	@GetMapping("{no}")
+	public ResponseEntity<Board> getArticle( 
 			@PathVariable int no
 			) throws Exception {
-		return new ResponseEntity<Board>(boardService.getArticle(category, no), HttpStatus.OK);
+		return new ResponseEntity<Board>(boardService.getArticle(no), HttpStatus.OK);
 	}
 	
 	@PostMapping
-	public ResponseEntity<String> writeArticle(
+	public ResponseEntity<?> writeArticle(
 			@RequestBody Board board
 			) throws Exception {
-		if (boardService.writeArticle(board)) {
-			return new ResponseEntity<String>("success", HttpStatus.OK);
-		}
-		return new ResponseEntity<String>("fail", HttpStatus.NO_CONTENT);
+		return new ResponseEntity<>(boardService.writeArticle(board), HttpStatus.OK);
 	}
 	
 	@PutMapping
-	public ResponseEntity<String> modifyArticle(
+	public ResponseEntity<?> modifyArticle(
 			@RequestBody Board board
 			) throws Exception {
-		if (boardService.modifyArticle(board)) {
-			return new ResponseEntity<String>("success", HttpStatus.OK);
-		}
-		return new ResponseEntity<String>("fail", HttpStatus.NO_CONTENT);
+		return new ResponseEntity<>(boardService.modifyArticle(board), HttpStatus.OK);
 	}
 	
 	@PutMapping("/hit")
-	public ResponseEntity<String> updateHit(
+	public ResponseEntity<?> updateHit(
 			@RequestBody Board board
 			) throws Exception {
-		if (boardService.updateHit(board)) {
-			return new ResponseEntity<String>("success", HttpStatus.OK);
-		}
-		return new ResponseEntity<String>("fail", HttpStatus.NO_CONTENT);
+		return new ResponseEntity<>(boardService.updateHit(board), HttpStatus.OK);
 	}
 	
 	@PutMapping("/like")
-	public ResponseEntity<String> updateLike(
+	public ResponseEntity<?> updateLike(
 			@RequestBody Board board
 			) throws Exception {
-		if (boardService.updateLike(board)) {
-			return new ResponseEntity<String>("success", HttpStatus.OK);
-		}
-		return new ResponseEntity<String>("fail", HttpStatus.NO_CONTENT);
+		return new ResponseEntity<>(boardService.updateLike(board), HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/{category}/{no}")
-	public ResponseEntity<String> deleteArticle(
-			@PathVariable String category,
+	@DeleteMapping("{no}")
+	public ResponseEntity<?> deleteArticle(
 			@PathVariable int no
 			) throws Exception {
-		if(boardService.deleteArticle(category, no)) {
-			return new ResponseEntity<String>("success", HttpStatus.OK);
-		}
-		return new ResponseEntity<String>("fail", HttpStatus.NO_CONTENT);
+		return new ResponseEntity<>(boardService.deleteArticle(no), HttpStatus.OK);
 	}
 	
+	// 댓글 부분 구현 예정
 }
