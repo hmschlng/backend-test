@@ -61,7 +61,7 @@ public class MemberServiceImpl implements MemberService {
 		Member member = getMember(emailId);
 		if(member != null) {
 			String tempPw = mailService.sendPassChangeMail(emailId);
-			member.setPass(tempPw);
+			member.setPass(PasswordEncoder.getSha256Hashcode(tempPw));
 			return sqlSession.getMapper(MemberMapper.class).updatePass(member.getEmailId(), member.getPass()) == 1;
 		}
 		return false;

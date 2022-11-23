@@ -89,7 +89,7 @@ public class MemberController {
 	 * @return true if data successfully updated, false if failed
 	 * @throws Exception
 	 */
-	@PutMapping("updatePw")
+	@PutMapping("update")
 	public ResponseEntity<?> updateMember(
 			@RequestBody Member member
 			) throws Exception {

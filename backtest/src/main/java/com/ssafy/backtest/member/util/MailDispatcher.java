@@ -33,10 +33,11 @@ public class MailDispatcher {
 	        props.put("mail.smtp.host", SMTP_HOST);
 	        props.put("mail.smtp.port", SMTP_PORT);
 	        props.put("mail.smtp.auth", "true");
+	        props.put("mail.smtp.ssl.trust", "smtp.naver.com");
 	        		
 			this.session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
 	            protected PasswordAuthentication getPasswordAuthentication() {
-	                return new PasswordAuthentication("soulb9@naver.com", "didos9430!");
+	                return new PasswordAuthentication("soulb9@naver.com", "didos9430!A");
 	            }
 	        });
 			MimeMessage message = new MimeMessage(session);
@@ -90,7 +91,7 @@ public class MailDispatcher {
 	        		
 			this.session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
 	            protected PasswordAuthentication getPasswordAuthentication() {
-	                return new PasswordAuthentication("soulb9@naver.com", "didos9430!");
+	                return new PasswordAuthentication("soulb9@naver.com", "didos9430!A");
 	            }
 	        });
 			

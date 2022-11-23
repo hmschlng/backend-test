@@ -12,19 +12,29 @@
 	<script>
 		document.getElementById("testBtn").addEventListener("click", () => {
 			let result = fetch("//localhost:9999/member", {
-				method: "DELETE",
+					method: "DELETE",
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify({
+						emailId: "didos9430@gmail.com",
+					})
+				}) /*{
+				method: "PUT",
 				headers: {
 					'Content-Type': 'application/json',
 				},
 				body: JSON.stringify({
 					emailId: "didos9430@gmail.com",
+					pass: "43214321",
 				})
-			})
+			})*/
 			.then(response => response.json())
 			.then((data) => {
 				console.log(data);
 			});
 		});
+
 	</script>
 </body>
 </html>
