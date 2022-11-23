@@ -27,11 +27,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
-	public Board getArticle(String category, int no) throws Exception {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("category", category);
-		map.put("articleNo", no);
-		return sqlSession.getMapper(BoardMapper.class).getArticle(map);
+	public Board getArticle(int no) throws Exception {
+		return sqlSession.getMapper(BoardMapper.class).getArticle(no);
 	}
 
 	@Override
@@ -59,11 +56,8 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	@Transactional
-	public boolean deleteArticle(String category, int no) throws Exception {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("category", category);
-		map.put("articleNo", no);
-		return sqlSession.getMapper(BoardMapper.class).deleteArticle(map);
+	public boolean deleteArticle(int no) throws Exception {
+		return sqlSession.getMapper(BoardMapper.class).deleteArticle(no) == 1;
 	}
 	
 }

@@ -9,11 +9,11 @@ import com.ssafy.backtest.board.model.dto.BoardParam;
 public interface BoardService {
 	
 	List<Board> listArticle(BoardParam boardParam) throws Exception;
-	Board getArticle(String category, int no) throws Exception;
+	Board getArticle(int no) throws Exception;
 	boolean writeArticle(Board board) throws Exception;
 	boolean modifyArticle(Board board) throws Exception;
 	boolean updateHit(Board board) throws Exception;
 	boolean updateLike(Board board) throws Exception;
-	boolean deleteArticle(String category, int no) throws Exception;
+	boolean deleteArticle(int no) throws Exception;
 	
 }

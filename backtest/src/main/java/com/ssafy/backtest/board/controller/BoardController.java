@@ -34,71 +34,50 @@ public class BoardController {
 	public ResponseEntity<List<Board>> getBoardList(
 			BoardParam boardParam
 			) throws Exception {
-		
-		System.out.println("------------------------------");
-		System.out.println(boardParam.toString());
-//		String category, @RequestParam int pgno, @RequestParam int pageSize, @RequestParam String option, @RequestParam String keyword
 		return new ResponseEntity<List<Board>>(boardService.listArticle(boardParam), HttpStatus.OK);
-//		return null;
 	}
 	
-	@GetMapping("/view/{category}/{no}")
-	public ResponseEntity<Board> getArticle(
-			@PathVariable String category, 
+	@GetMapping("{no}")
+	public ResponseEntity<Board> getArticle( 
 			@PathVariable int no
 			) throws Exception {
-		return new ResponseEntity<Board>(boardService.getArticle(category, no), HttpStatus.OK);
+		return new ResponseEntity<Board>(boardService.getArticle(no), HttpStatus.OK);
 	}
 	
 	@PostMapping
-	public ResponseEntity<String> writeArticle(
+	public ResponseEntity<?> writeArticle(
 			@RequestBody Board board
 			) throws Exception {
-		if (boardService.writeArticle(board)) {
-			return new ResponseEntity<String>("success", HttpStatus.OK);
-		}
-		return new ResponseEntity<String>("fail", HttpStatus.NO_CONTENT);
+		return new ResponseEntity<>(boardService.writeArticle(board), HttpStatus.OK);
 	}
 	
 	@PutMapping
-	public ResponseEntity<String> modifyArticle(
+	public ResponseEntity<?> modifyArticle(
 			@RequestBody Board board
 			) throws Exception {
-		if (boardService.modifyArticle(board)) {
-			return new ResponseEntity<String>("success", HttpStatus.OK);
-		}
-		return new ResponseEntity<String>("fail", HttpStatus.NO_CONTENT);
+		return new ResponseEntity<>(boardService.modifyArticle(board), HttpStatus.OK);
 	}
 	
 	@PutMapping("/hit")
-	public ResponseEntity<String> updateHit(
+	public ResponseEntity<?> updateHit(
 			@RequestBody Board board
 			) throws Exception {
-		if (boardService.updateHit(board)) {
-			return new ResponseEntity<String>("success", HttpStatus.OK);
-		}
-		return new ResponseEntity<String>("fail", HttpStatus.NO_CONTENT);
+		return new ResponseEntity<>(boardService.updateHit(board), HttpStatus.OK);
 	}
 	
 	@PutMapping("/like")
-	public ResponseEntity<String> updateLike(
+	public ResponseEntity<?> updateLike(
 			@RequestBody Board board
 			) throws Exception {
-		if (boardService.updateLike(board)) {
-			return new ResponseEntity<String>("success", HttpStatus.OK);
-		}
-		return new ResponseEntity<String>("fail", HttpStatus.NO_CONTENT);
+		return new ResponseEntity<>(boardService.updateLike(board), HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/{category}/{no}")
-	public ResponseEntity<String> deleteArticle(
-			@PathVariable String category,
+	@DeleteMapping("{no}")
+	public ResponseEntity<?> deleteArticle(
 			@PathVariable int no
 			) throws Exception {
-		if(boardService.deleteArticle(category, no)) {
-			return new ResponseEntity<String>("success", HttpStatus.OK);
-		}
-		return new ResponseEntity<String>("fail", HttpStatus.NO_CONTENT);
+		return new ResponseEntity<>(boardService.deleteArticle(no), HttpStatus.OK);
 	}
 	
+	// 댓글 부분 구현 예정
 }

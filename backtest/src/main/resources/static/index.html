@@ -11,13 +11,12 @@
 	<h3 id="result"></h3>
 	<script>
 		document.getElementById("testBtn").addEventListener("click", () => {
-			let result = fetch("//localhost:9999/house/apt/1111011800/202201")
+			let result = fetch("//localhost:9999/board/241", {
+				method: "DELETE",
+			})
 			.then(response => response.json())
 			.then((data) => {
-				for(sido of data) {
-					console.log(sido);
-					document.getElementById("result").innerText.concat(`${sido.code} / ${sido.name}`);
-				}
+				console.log(data);
 			});
 		});
 	</script>

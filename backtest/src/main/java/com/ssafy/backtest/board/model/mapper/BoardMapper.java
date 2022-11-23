@@ -12,13 +12,12 @@ import com.ssafy.backtest.board.model.dto.BoardParam;
 @Mapper
 public interface BoardMapper {
 
-	List<Board> initArticle(String category) throws SQLException;
 	List<Board> listArticle(BoardParam boardParam) throws SQLException;
-	Board getArticle(Map<String, Object> map) throws SQLException;
+	Board getArticle(int no) throws SQLException;
 	int writeArticle(Board board) throws SQLException;
 	int modifyArticle(Board board) throws SQLException;
 	int updateHit(Board board) throws SQLException;
 	int updateLike(Board board) throws SQLException;
-	boolean deleteArticle(Map<String, Object> map) throws SQLException;
+	int deleteArticle(int no) throws SQLException;
 
 }

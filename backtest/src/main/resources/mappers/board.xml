@@ -35,11 +35,10 @@
 		limit #{start}, #{pageSize}
 	</select>
 
-	<select id="getArticle" parameterType="map" resultMap="board">
+	<select id="getArticle" parameterType="int" resultMap="board">
 		select *
 		from board
-		where category = #{category} 
-		and article_no = #{articleNo}
+		where article_no = #{articleNo}
 	</select>
 	
 	<insert id="writeArticle" parameterType="board">
@@ -68,10 +67,9 @@
 		and article_no = #{articleNo}
 	</update>
 	
-	<delete id="deleteArticle" parameterType="map">
+	<delete id="deleteArticle" parameterType="int">
 		delete from board
-		where category = #{category}
-		and article_no = #{articleNo};
+		where article_no = #{articleNo};
 	</delete>
 	
 </mapper>
