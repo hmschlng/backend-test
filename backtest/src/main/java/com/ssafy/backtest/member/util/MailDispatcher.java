@@ -1,4 +1,4 @@
-package com.ssafy.backtest.util;
+package com.ssafy.backtest.member.util;
 
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
@@ -20,28 +20,25 @@ import org.springframework.stereotype.Component;
 import com.ssafy.backtest.member.model.dto.Member;
 
 @Component
-public class MailService {
-	private static String SMTP_HOST = "smtp.naver.com";
-	private static int SMTP_PORT = 587;
-	private static Session session;
-	
-	static {
-		Properties props = new Properties();
-		
-        props.put("mail.smtp.host", SMTP_HOST);
-        props.put("mail.smtp.port", SMTP_PORT);
-        props.put("mail.smtp.auth", "true");
-        		
-		session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("soulb9@naver.com", "didos9430!");
-            }
-        });
-	}
+public class MailDispatcher {
+	private String SMTP_HOST = "smtp.naver.com";
+	private int SMTP_PORT = 587;
+	private Session session;
 	
 	public String sendAuthMail(String addr) {
 		String authCode = getAuthCode();
 		try {
+			Properties props = new Properties();
+			
+	        props.put("mail.smtp.host", SMTP_HOST);
+	        props.put("mail.smtp.port", SMTP_PORT);
+	        props.put("mail.smtp.auth", "true");
+	        		
+			this.session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+	            protected PasswordAuthentication getPasswordAuthentication() {
+	                return new PasswordAuthentication("soulb9@naver.com", "didos9430!");
+	            }
+	        });
 			MimeMessage message = new MimeMessage(session);
 			message.setFrom(new InternetAddress("soulb9@naver.com", "소방", "UTF-8"));
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(addr));
@@ -85,6 +82,18 @@ public class MailService {
 	public String sendPassChangeMail(String addr) {
 		String tempPw = getTempPassword();
 		try {
+			Properties props = new Properties();
+			
+	        props.put("mail.smtp.host", SMTP_HOST);
+	        props.put("mail.smtp.port", SMTP_PORT);
+	        props.put("mail.smtp.auth", "true");
+	        		
+			this.session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+	            protected PasswordAuthentication getPasswordAuthentication() {
+	                return new PasswordAuthentication("soulb9@naver.com", "didos9430!");
+	            }
+	        });
+			
 			MimeMessage message = new MimeMessage(session);
 			message.setFrom(new InternetAddress("soulb9@naver.com","소방","UTF-8"));
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(addr));

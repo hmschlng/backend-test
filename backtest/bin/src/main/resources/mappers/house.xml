@@ -29,9 +29,9 @@
 		select *
 		from houseinfo hi left join housedeal hd
 		on hi.aptCode = hd.aptCode
-		where hi.dongCode = #{areaCode}
+		where hi.dongCode like #{areaCode}
 		and hd.dealYear = #{year}
 		and hd.dealMonth = #{month}
 	</select>
-
+	
 </mapper>

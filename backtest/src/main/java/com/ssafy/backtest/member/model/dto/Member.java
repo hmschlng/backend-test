@@ -10,16 +10,17 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Member {
-	String emailId;
-	String pass;
-	String name;
-	String nickname;
-	String phoneNumber;
-	String imgOrigin;
-	String imgSave;
-	String joinDate;
-	String exitDate;
-	String lastLoginDate;
-	String Status;
-	String isAdmin;
+	private String emailId;
+	private String pass;
+	private String name;
+	private String nickname;
+	private String phoneNumber;
+	private String imgOrigin;
+	private String imgSave;
+	private String joinDate;
+	private String exitDate;
+	private String lastLoginDate;
+	private String Status;
+	private String isAdmin;
+	private String token;
 }

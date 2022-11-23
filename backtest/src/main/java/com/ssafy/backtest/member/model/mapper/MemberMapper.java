@@ -10,9 +10,11 @@ import com.ssafy.backtest.member.model.dto.Member;
 public interface MemberMapper {
 
 	Member selectMember(String emailId) throws SQLException;
-
-	boolean insertMember(Member member) throws SQLException;
-
-	int updatePw(String pass) throws SQLException;
-
+	int insertMember(Member member) throws SQLException;
+	int deleteMember(String emailId) throws SQLException;
+	Member loginMember(Member member) throws SQLException;
+	int updatePass(String emailId, String pass) throws SQLException;
+	int updateNickname(String emailId, String nickname) throws SQLException;
+	int updatePhoneNumber(String emailId, String phoneNumber) throws SQLException;
+	
 }

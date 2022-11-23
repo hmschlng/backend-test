@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.backtest.board.model.mapper.BoardMapper">
+
+	<resultMap type="board" id="board">
+		<result column="article_no" property="articleNo"/>
+		<result column="category" property="category"/>
+		<result column="member_id" property="memberId"/>
+		<result column="nickname" property="nickname"/>
+		<result column="title" property="title"/>
+		<result column="content" property="content"/>
+		<result column="hit" property="hit"/>
+		<result column="like" property="like"/>
+		<result column="register_time" property="registerTime"/>
+	</resultMap>
+	
+	<select id="listArticle" parameterType="boardParam" resultMap="board">
+		select *
+		from board
+		where category = #{category}
+		<if test="keyword != null and keyword != ''">
+			<if test="option == 'title'">
+				and title like concat('%', #{keyword}, '%')
+			</if>
+			<if test="option == 'author'">
+				and nickname like concat('%', #{keyword}, '%')
+			</if>
+			<if test="option == 'contents'">
+				and content like concat('%', #{keyword}, '%')
+			</if>
+		</if>
+		order by article_no desc
+		limit #{start}, #{pageSize}
+	</select>
+
+	<select id="getArticle" parameterType="int" resultMap="board">
+		select *
+		from board
+		where article_no = #{articleNo}
+	</select>
+	
+	<insert id="writeArticle" parameterType="board">
+		insert into board (category, member_id, nickname, title, content)
+		values (#{category}, #{memberId}, #{nickName}, #{title}, #{content})
+	</insert>
+	
+	<update id="modifyArticle" parameterType="board">
+		update board
+		set title = #{title}, content = #{content}
+		where category = #{category}
+		and article_no = #{articleNo}
+	</update>
+	
+	<update id="updateHit" parameterType="board">
+		update board
+		set hit = hit + 1
+		where category = #{category}
+		and article_no = #{articleNo}
+	</update>
+	
+	<update id="updateLike" parameterType="board">
+		update board
+		set like = like + 1
+		where category = #{category}
+		and article_no = #{articleNo}
+	</update>
+	
+	<delete id="deleteArticle" parameterType="int">
+		delete from board
+		where article_no = #{articleNo};
+	</delete>
+	
+</mapper>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.backtest.member.model.mapper.MemberMapper">
+
+<!-- 	<resultMap type="member" id="member">
+		<result column="email_id" property="emailId"/>
+		<result column="pass" property="pass"/>
+		<result column="name" property="name"/>
+		<result column="nickname" property="nickname"/>
+		<result column="phone_number" property="phoneNumber"/>
+		<result column="img_origin" property="imgOrigin"/>
+		<result column="img_save" property="imgSave"/>
+		<result column="join_date" property="joinDate"/>
+		<result column="exit_date" property="exitDate"/>
+		<result column="last_login_date" property="lastLoginDate"/>
+		<result column="status" property="Status"/>
+		<result column="is_admin" property="isAdmin"/>
+	</resultMap>
+	
+	<select id="selectMember" parameterType="String" resultMap="member">
+		select *
+		from member
+		where email_id = #{emailId}
+	</select> -->
+	
+	
+		
+</mapper>
