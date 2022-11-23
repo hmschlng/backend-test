@@ -1,5 +1,0 @@
-package com.ssafy.backtest.board.model.service;
-
-public interface BoardService {
-
-}

@@ -1,6 +1,0 @@
-package com.ssafy.backtest.member.model.mapper;
-
-@Mapper
-public interface MemberMapper {
-
-}
