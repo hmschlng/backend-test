@@ -18,17 +18,12 @@ public class BoardServiceImpl implements BoardService {
 
 	@Autowired
 	private SqlSession sqlSession;
-	
+
 	@Override
-	public List<Board> listArticle(String category) throws Exception {
-		return sqlSession.getMapper(BoardMapper.class).initArticle(category);
-	}
-	
-	@Override
-	public List<Board> listArticle(Map<String, Object> params) throws Exception {
-		int start = (int)params.get("pgno") == 1 ? 0 : (int)params.get("pgno") - 1 * (int)params.get("pageSize");
-		params.put("start", start);
-		return sqlSession.getMapper(BoardMapper.class).listArticle(params);
+	public List<Board> listArticle(BoardParam boardParam) throws Exception {
+		int start = boardParam.getPgno() == 1 ? 0 : (boardParam.getPgno() - 1) * boardParam.getPageSize();
+		boardParam.setStart(start);
+		return sqlSession.getMapper(BoardMapper.class).listArticle(boardParam);
 	}
 	
 	@Override

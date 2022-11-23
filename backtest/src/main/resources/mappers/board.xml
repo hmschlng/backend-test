@@ -16,15 +16,7 @@
 		<result column="register_time" property="registerTime"/>
 	</resultMap>
 	
-	<select id="initArticle" parameterType="String" resultMap="board">
-		select *
-		from board
-		where category = #{category}
-		order by article_no desc
-		limit 0, 20
-	</select>
-	
-	<select id="listArticle" parameterType="map" resultMap="board">
+	<select id="listArticle" parameterType="boardParam" resultMap="board">
 		select *
 		from board
 		where category = #{category}

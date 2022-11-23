@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.backtest.board.model.dto.Board;
@@ -29,30 +30,16 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 	
-	@GetMapping("/{category}")
+	@GetMapping
 	public ResponseEntity<List<Board>> getBoardList(
-			@PathVariable String category
-			) throws Exception {
-		return new ResponseEntity<List<Board>>(boardService.listArticle(category), HttpStatus.OK);
-	}
-	
-	@GetMapping("/{category}/{pgno}/{pageSize}/{option}/{keyword}")
-	public ResponseEntity<List<Board>> getBoardList(
-			@PathVariable String category,
-			@PathVariable int pgno,
-			@PathVariable int pageSize,
-			@PathVariable String option,
-			@PathVariable String keyword
+			BoardParam boardParam
 			) throws Exception {
 		
-		Map<String, Object> params = new HashMap<>();
-		
-		params.put("category", category);
-		params.put("pgno", pgno);
-		params.put("pageSize", pageSize);
-		params.put("option", option);
-		params.put("keyword", keyword);
-		return new ResponseEntity<List<Board>>(boardService.listArticle(params), HttpStatus.OK);
+		System.out.println("------------------------------");
+		System.out.println(boardParam.toString());
+//		String category, @RequestParam int pgno, @RequestParam int pageSize, @RequestParam String option, @RequestParam String keyword
+		return new ResponseEntity<List<Board>>(boardService.listArticle(boardParam), HttpStatus.OK);
+//		return null;
 	}
 	
 	@GetMapping("/view/{category}/{no}")

@@ -4,10 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class BoardParam {
 	String category;
 	int pgno;
@@ -15,10 +18,4 @@ public class BoardParam {
 	int start;
 	String option;
 	String keyword;
-	
-	public BoardParam() {
-		this.category = "share";
-		this.pgno = 1;
-		this.pageSize = 20;
-	}
 }
