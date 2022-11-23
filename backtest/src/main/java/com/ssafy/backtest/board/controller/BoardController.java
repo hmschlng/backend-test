@@ -29,6 +29,13 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 	
+	@GetMapping("/{category}")
+	public ResponseEntity<List<Board>> getBoardList(
+			@PathVariable String category
+			) throws Exception {
+		return new ResponseEntity<List<Board>>(boardService.listArticle(category), HttpStatus.OK);
+	}
+	
 	@GetMapping("/{category}/{pgno}/{pageSize}/{option}/{keyword}")
 	public ResponseEntity<List<Board>> getBoardList(
 			@PathVariable String category,

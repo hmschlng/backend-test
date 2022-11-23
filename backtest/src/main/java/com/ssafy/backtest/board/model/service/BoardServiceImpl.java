@@ -20,11 +20,15 @@ public class BoardServiceImpl implements BoardService {
 	private SqlSession sqlSession;
 	
 	@Override
+	public List<Board> listArticle(String category) throws Exception {
+		return sqlSession.getMapper(BoardMapper.class).initArticle(category);
+	}
+	
+	@Override
 	public List<Board> listArticle(Map<String, Object> params) throws Exception {
 		int start = (int)params.get("pgno") == 1 ? 0 : (int)params.get("pgno") - 1 * (int)params.get("pageSize");
 		params.put("start", start);
-		List<Board> list = sqlSession.getMapper(BoardMapper.class).listArticle(params);
-		return list;
+		return sqlSession.getMapper(BoardMapper.class).listArticle(params);
 	}
 	
 	@Override

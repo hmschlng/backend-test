@@ -8,6 +8,7 @@ import com.ssafy.backtest.board.model.dto.BoardParam;
 
 public interface BoardService {
 	
+	List<Board> listArticle(String category) throws Exception;
 	List<Board> listArticle(Map<String, Object> params) throws Exception;
 	Board getArticle(String category, int no) throws Exception;
 	boolean writeArticle(Board board) throws Exception;
