@@ -43,7 +43,7 @@
 	
 	<insert id="writeArticle" parameterType="board">
 		insert into board (category, member_id, nickname, title, content)
-		values (#{category}, #{memberId}, #{nickName}, #{title}, #{content})
+		values (#{category}, #{memberId}, #{nickname}, #{title}, #{content})
 	</insert>
 	
 	<update id="modifyArticle" parameterType="board">

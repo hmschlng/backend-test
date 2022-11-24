@@ -55,7 +55,7 @@ public class MemberController {
 	
 	/**
 	 * 아이디 유효성검사
-	 * 사용자가 입력한 이메일 아이디가 유효한지 검사합니다. 아이디는 고유해야 하며, 유효한 이메일이어야 합니다.
+	 * 회원가입 시 사용자가 입력한 이메일 아이디가 유효한지 검사합니다. 아이디는 고유해야 하며, 유효한 이메일이어야 합니다.
 	 * 아이디가 고유한 이메일 주소라면, 해당 이메일 주소로 인증 메일을 보내고 인증 번호를 반환합니다.
 	 * @param member
 	 * @return String of 6-digit authentication number when the email id is unique, null if email id is duplicated
@@ -103,7 +103,7 @@ public class MemberController {
 	 * @return true if data successfully deleted, false id failed
 	 * @throws Exception
 	 */
-	@DeleteMapping
+	@DeleteMapping("delete")
 	public ResponseEntity<?> quit(
 			@RequestBody Member member
 			) throws Exception {
