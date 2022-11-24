@@ -22,7 +22,7 @@ public class JwtUtil {
 	
 	public JwtUtil() throws Exception {
 		BufferedReader br;
-		br = new BufferedReader(new FileReader(System.getProperty("user.dir") + "\\..\\account.dat"));
+		br = new BufferedReader(new FileReader("account.dat"));
 		br.readLine();
         br.readLine();
         SALT = br.readLine();
