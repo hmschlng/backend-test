@@ -13,6 +13,7 @@ import com.ssafy.backtest.board.model.dto.BoardParam;
 public interface BoardMapper {
 
 	List<Board> listArticle(BoardParam boardParam) throws SQLException;
+	int countArticle(BoardParam boardParam) throws SQLException;
 	Board getArticle(int no) throws SQLException;
 	int writeArticle(Board board) throws SQLException;
 	int modifyArticle(Board board) throws SQLException;

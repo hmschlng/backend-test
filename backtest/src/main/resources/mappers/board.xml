@@ -34,6 +34,24 @@
 		order by article_no desc
 		limit #{start}, #{pageSize}
 	</select>
+	
+	<select id="countArticle" parameterType="boardParam" resultMap="int">
+		select count(*)
+		from board
+		where category = #{category}
+		<if test="keyword != null and keyword != ''">
+			<if test="option == 'title'">
+				and title like concat('%', #{keyword}, '%')
+			</if>
+			<if test="option == 'author'">
+				and nickname like concat('%', #{keyword}, '%')
+			</if>
+			<if test="option == 'contents'">
+				and content like concat('%', #{keyword}, '%')
+			</if>
+		</if>
+		order by article_no desc
+	</select>
 
 	<select id="getArticle" parameterType="int" resultMap="board">
 		select *

@@ -37,11 +37,11 @@ public class MailDispatcher {
 	        		
 			this.session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
 	            protected PasswordAuthentication getPasswordAuthentication() {
-	                return new PasswordAuthentication("soulb9@naver.com", "didos9430!A");
+	                return new PasswordAuthentication("id@naver.com", "pw");
 	            }
 	        });
 			MimeMessage message = new MimeMessage(session);
-			message.setFrom(new InternetAddress("soulb9@naver.com", "소방", "UTF-8"));
+			message.setFrom(new InternetAddress("id@naver.com", "소방", "UTF-8"));
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(addr));
 			message.setSubject("[소방] 메일 인증번호 확인");
 			message.setText("인증 코드를 홈페이지에 입력하세요\n"
@@ -91,12 +91,12 @@ public class MailDispatcher {
 	        		
 			this.session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
 	            protected PasswordAuthentication getPasswordAuthentication() {
-	                return new PasswordAuthentication("soulb9@naver.com", "didos9430!A");
+	                return new PasswordAuthentication("id@naver.com", "pw");
 	            }
 	        });
 			
 			MimeMessage message = new MimeMessage(session);
-			message.setFrom(new InternetAddress("soulb9@naver.com","소방","UTF-8"));
+			message.setFrom(new InternetAddress("id@naver.com","소방","UTF-8"));
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(addr));
 			message.setSubject("[소방] 비밀번호 변경 메일입니다.");
 			message.setText("임시 비밀번호는 " + tempPw + "입니다. 이 비밀번호로 로그인하셔서 비밀번호를 변경해 주세요.");

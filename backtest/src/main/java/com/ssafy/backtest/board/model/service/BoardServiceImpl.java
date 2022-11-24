@@ -27,6 +27,11 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
+	public int countArticle(BoardParam boardParam) throws Exception {
+		return sqlSession.getMapper(BoardMapper.class).countArticle(boardParam);
+	}
+	
+	@Override
 	public Board getArticle(int no) throws Exception {
 		return sqlSession.getMapper(BoardMapper.class).getArticle(no);
 	}

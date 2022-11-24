@@ -37,6 +37,13 @@ public class BoardController {
 		return new ResponseEntity<List<Board>>(boardService.listArticle(boardParam), HttpStatus.OK);
 	}
 	
+	@GetMapping("count") 
+	public ResponseEntity<?> countListSize(
+			BoardParam boardParam
+			) throws Exception {
+		return new ResponseEntity<>(boardService.countArticle(boardParam), HttpStatus.OK);
+	}
+	
 	@GetMapping("{no}")
 	public ResponseEntity<Board> getArticle( 
 			@PathVariable int no
