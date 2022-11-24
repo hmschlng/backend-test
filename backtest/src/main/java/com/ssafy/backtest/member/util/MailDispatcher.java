@@ -35,13 +35,13 @@ public class MailDispatcher {
 	        props.put("mail.smtp.auth", "true");
 	        props.put("mail.smtp.ssl.trust", "smtp.naver.com");
 	        		
-			this.session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+			this.session = Session.getInstance(props, new javax.mail.Authenticator() {
 	            protected PasswordAuthentication getPasswordAuthentication() {
 	                return new PasswordAuthentication("id@naver.com", "pw");
 	            }
 	        });
 			MimeMessage message = new MimeMessage(session);
-			message.setFrom(new InternetAddress("id@naver.com", "소방", "UTF-8"));
+			message.setFrom(new InternetAddress("id@naver.com", "소방 - 소중한 내방 찾기", "UTF-8"));
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(addr));
 			message.setSubject("[소방] 메일 인증번호 확인");
 			message.setText("인증 코드를 홈페이지에 입력하세요\n"
@@ -111,40 +111,5 @@ public class MailDispatcher {
 		}
 		return tempPw; 
 	}
-
-//	public static void main1(String[] args) {
-//		Member sender = new Member();
-//		sender.setEmailId("soulb9@naver.com");
-//		sender.setName("이방환");
-//		sender.setPass("didos9430!");
-//		
-//		Properties props = new Properties();
-//        props.put("mail.smtp.host", "smtp.naver.com");
-//        props.put("mail.smtp.port", 587);
-//        props.put("mail.smtp.auth", "true");
-//		
-//		Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
-//            protected PasswordAuthentication getPasswordAuthentication() {
-//                return new PasswordAuthentication(sender.getEmailId(), sender.getPass());
-//            }
-//        });
-//		
-//		try {
-//			MimeMessage message = new MimeMessage(session);
-//			message.setFrom(new InternetAddress("soulb9@naver.com","소방 - 소중한 내방 찾기","UTF-8"));
-//			message.addRecipient(Message.RecipientType.TO, new InternetAddress("soulb9@naver.com"));
-//			message.setSubject("테스트 메일");
-//			message.setText("테스트 메일 내용");
-//			
-//			Transport.send(message);
-//			System.out.println("Send complete!!");
-//		} catch (AddressException e) {
-//			e.printStackTrace();
-//		} catch (MessagingException e) {
-//			e.printStackTrace();
-//		} catch (UnsupportedEncodingException e) {
-//			e.printStackTrace();
-//		}
-//	}
 	
 }

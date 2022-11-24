@@ -4,7 +4,7 @@
 
 <mapper namespace="com.ssafy.backtest.member.model.mapper.MemberMapper">
 
-<!-- 	<resultMap type="member" id="member">
+ 	<resultMap type="member" id="member">
 		<result column="email_id" property="emailId"/>
 		<result column="pass" property="pass"/>
 		<result column="name" property="name"/>
@@ -19,12 +19,54 @@
 		<result column="is_admin" property="isAdmin"/>
 	</resultMap>
 	
+	<!-- 회원 정보 조회 -->
 	<select id="selectMember" parameterType="String" resultMap="member">
 		select *
 		from member
 		where email_id = #{emailId}
-	</select> -->
+	</select>
 	
+	<!-- 로그인 -->
+	<select id="loginMember" parameterType="member" resultMap="member">
+		select *
+		from member
+		where email_id = #{emailId} and pass = #{pass}
+	</select>
 	
-		
+	<!-- 회원 가입 -->
+	<insert id="insertMember" parameterType="member">
+		insert into member(email_id, pass, name, nickname, phone_number)
+		values(#{emailId}, #{pass}, #{name}, #{nickname}, #{phoneNumber})
+	</insert>
+	
+	<update id="updatePass" parameterType="map">
+		update member
+		set pass = #{pass} 
+		where email_id = #{emailId}
+	</update>
+	
+	<update id="updateNickname" parameterType="map">
+		update member
+		set nickname = #{nickname} 
+		where email_id = #{emailId}
+	</update>
+	
+	<update id="updatePhoneNumber" parameterType="map">
+		update member
+		set phone_number = #{phoneNumber} 
+		where email_id = #{emailId}
+	</update>
+	
+	<!-- <update id="updateProfileImg" parameterType="map">
+		update member
+		set pass = #{pass} 
+		where email_id = #{emailId}
+	</update> -->
+
+	<!-- 회원 탈퇴 -->
+	<delete id="deleteMember" parameterType="String">
+		delete from member
+		where email_id = #{emailId};
+	</delete>	
+	
 </mapper>

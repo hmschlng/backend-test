@@ -20,7 +20,7 @@ public class Member {
 	private String joinDate;
 	private String exitDate;
 	private String lastLoginDate;
-	private String Status;
+	private String status;
 	private String isAdmin;
 	private String token;
 }
