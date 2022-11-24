@@ -22,7 +22,7 @@ public class JwtUtil {
 	
 	public JwtUtil() throws Exception {
 		BufferedReader br;
-		br = new BufferedReader(new FileReader(System.getProperty("user.dir") + "\\account.txt"));
+		br = new BufferedReader(new FileReader(System.getProperty("user.dir") + "\\..\\account.dat"));
 		br.readLine();
         br.readLine();
         SALT = br.readLine();
@@ -32,7 +32,7 @@ public class JwtUtil {
 	public static <T> String create(String emailId) throws Exception {
 		Date expiry = Date.from(Instant.now().plus(1, ChronoUnit.HOURS));
 		return Jwts.builder()
-				.claim("emailId", "soulb9@naver.com") // 데이터
+				.claim("emailId", emailId) // 데이터
 				.setIssuer("sobang") // 토큰 발행인
 				.setIssuedAt(new Date()) // 토큰 발행시각
 				.setExpiration(expiry) // 토큰 만료 기한

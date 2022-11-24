@@ -32,7 +32,7 @@ public class MailDispatcher {
 	
 	public MailDispatcher() throws Exception {
 		BufferedReader br;
-		br = new BufferedReader(new FileReader(System.getProperty("user.dir") + "\\..\\account.txt"));
+		br = new BufferedReader(new FileReader(System.getProperty("user.dir") + "\\..\\account.dat"));
 		this.senderId = br.readLine();
         this.senderPass = br.readLine();
         br.close();
@@ -47,8 +47,6 @@ public class MailDispatcher {
 	        props.put("mail.smtp.port", SMTP_PORT);
 	        props.put("mail.smtp.auth", "true");
 	        props.put("mail.smtp.ssl.trust", "smtp.naver.com");
-	        System.out.println(senderId);
-	        System.out.println(senderPass);
 			this.session = Session.getInstance(props, new javax.mail.Authenticator() {
 	            protected PasswordAuthentication getPasswordAuthentication() {
 	                return new PasswordAuthentication(senderId, senderPass);
