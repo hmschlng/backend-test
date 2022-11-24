@@ -1,5 +1,7 @@
 package com.ssafy.backtest.member.util;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
@@ -16,7 +18,16 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @Component
 public class JwtUtil {
 
-	private static final String SALT = "sobangZZANGZZANG";
+	private static String SALT;
+	
+	public JwtUtil() throws Exception {
+		BufferedReader br;
+		br = new BufferedReader(new FileReader(System.getProperty("user.dir") + "\\account.txt"));
+		br.readLine();
+        br.readLine();
+        SALT = br.readLine();
+        br.close();
+	}
 	
 	public static <T> String create(String emailId) throws Exception {
 		Date expiry = Date.from(Instant.now().plus(1, ChronoUnit.HOURS));

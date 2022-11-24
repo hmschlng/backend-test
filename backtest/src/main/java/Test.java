@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.InputStreamReader;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
@@ -15,23 +18,26 @@ public class Test
 {
     public static void main(String[] args) throws Exception
     {
-    	String jwt = Jwts.builder()
-		// header에 들어갈 내용 및 서명을 하기 위한 SECRET_KEY
-		.signWith(SignatureAlgorithm.HS512, "sobangZZANGZZANG")
-		// payload에 들어갈 내용
-		.claim("emailId", "soulb9@naver.com")
-		.setIssuer("sobang.com") // iss
-		.setIssuedAt(new Date()) // iat
-		.setExpiration(Date.from(Instant.now().plus(1, ChronoUnit.HOURS))) // exp
-		.compact();
-//    	String SALT = "sobangZZANGZZANG";
-//    	
-//		String jwt = Jwts.builder().setHeaderParam("typ", "JWT").setHeaderParam("regDate", System.currentTimeMillis())
-//				.setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60))
-//				.setSubject("access-token").claim("emailId", "soulb9@naver.com").signWith(SignatureAlgorithm.HS256, SALT.getBytes(Charsets.UTF_8)).compact();
-    	System.out.println(jwt);
-    	Claims claims = Jwts.parser().setSigningKey("sobangZZANGZZANG").parseClaimsJws(jwt).getBody();
-    	System.out.println(claims.get("emailId"));
+    	
+        
+        
+//    	String jwt = Jwts.builder()
+//		// header에 들어갈 내용 및 서명을 하기 위한 SECRET_KEY
+//		.signWith(SignatureAlgorithm.HS512, "sobangZZANGZZANG")
+//		// payload에 들어갈 내용
+//		.claim("emailId", "soulb9@naver.com")
+//		.setIssuer("sobang.com") // iss
+//		.setIssuedAt(new Date()) // iat
+//		.setExpiration(Date.from(Instant.now().plus(1, ChronoUnit.HOURS))) // exp
+//		.compact();
+////    	String SALT = "sobangZZANGZZANG";
+////    	
+////		String jwt = Jwts.builder().setHeaderParam("typ", "JWT").setHeaderParam("regDate", System.currentTimeMillis())
+////				.setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60))
+////				.setSubject("access-token").claim("emailId", "soulb9@naver.com").signWith(SignatureAlgorithm.HS256, SALT.getBytes(Charsets.UTF_8)).compact();
+//    	System.out.println(jwt);
+//    	Claims claims = Jwts.parser().setSigningKey("sobangZZANGZZANG").parseClaimsJws(jwt).getBody();
+//    	System.out.println(claims.get("emailId"));
     }
 }
 /*

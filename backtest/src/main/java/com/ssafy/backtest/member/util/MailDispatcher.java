@@ -1,5 +1,8 @@
 package com.ssafy.backtest.member.util;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,6 +27,16 @@ public class MailDispatcher {
 	private String SMTP_HOST = "smtp.naver.com";
 	private int SMTP_PORT = 587;
 	private Session session;
+	private String senderId;
+	private String senderPass;
+	
+	public MailDispatcher() throws Exception {
+		BufferedReader br;
+		br = new BufferedReader(new FileReader(System.getProperty("user.dir") + "\\account.txt"));
+		this.senderId = br.readLine();
+        this.senderPass = br.readLine();
+        br.close();
+	}
 	
 	public String sendAuthMail(String addr) {
 		String authCode = getAuthCode();
@@ -34,14 +47,15 @@ public class MailDispatcher {
 	        props.put("mail.smtp.port", SMTP_PORT);
 	        props.put("mail.smtp.auth", "true");
 	        props.put("mail.smtp.ssl.trust", "smtp.naver.com");
-	        		
+	        System.out.println(senderId);
+	        System.out.println(senderPass);
 			this.session = Session.getInstance(props, new javax.mail.Authenticator() {
 	            protected PasswordAuthentication getPasswordAuthentication() {
-	                return new PasswordAuthentication("id@naver.com", "pw");
+	                return new PasswordAuthentication(senderId, senderPass);
 	            }
 	        });
 			MimeMessage message = new MimeMessage(session);
-			message.setFrom(new InternetAddress("id@naver.com", "소방 - 소중한 내방 찾기", "UTF-8"));
+			message.setFrom(new InternetAddress(senderId, "소방 - 소중한 내방 찾기", "UTF-8"));
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(addr));
 			message.setSubject("[소방] 메일 인증번호 확인");
 			message.setText("인증 코드를 홈페이지에 입력하세요\n"
@@ -91,12 +105,12 @@ public class MailDispatcher {
 	        		
 			this.session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
 	            protected PasswordAuthentication getPasswordAuthentication() {
-	                return new PasswordAuthentication("id@naver.com", "pw");
+	                return new PasswordAuthentication(senderId, senderPass);
 	            }
 	        });
 			
 			MimeMessage message = new MimeMessage(session);
-			message.setFrom(new InternetAddress("id@naver.com","소방","UTF-8"));
+			message.setFrom(new InternetAddress(senderId + "@naver.com","소방","UTF-8"));
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(addr));
 			message.setSubject("[소방] 비밀번호 변경 메일입니다.");
 			message.setText("임시 비밀번호는 " + tempPw + "입니다. 이 비밀번호로 로그인하셔서 비밀번호를 변경해 주세요.");
