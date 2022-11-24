@@ -32,7 +32,7 @@ public class MailDispatcher {
 	
 	public MailDispatcher() throws Exception {
 		BufferedReader br;
-		br = new BufferedReader(new FileReader(System.getProperty("user.dir") + "\\account.txt"));
+		br = new BufferedReader(new FileReader(System.getProperty("user.dir") + "\\..\\account.txt"));
 		this.senderId = br.readLine();
         this.senderPass = br.readLine();
         br.close();
