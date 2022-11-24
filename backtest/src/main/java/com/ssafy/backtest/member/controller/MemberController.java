@@ -83,8 +83,22 @@ public class MemberController {
 	}
 	
 	/**
+	 * 비밀번호 변경
+	 * 사용자의 비밀번호를 변경합니다. 비밀번호는 SHA-256 해시코드로 인코딩되어 저장됩니다. 
+	 * @param member
+	 * @return true if data successfully updated, false if failed
+	 * @throws Exception
+	 */
+	@PutMapping("pass")
+	public ResponseEntity<?> updatePass(
+			@RequestBody Member member
+			) throws Exception {
+		return new ResponseEntity<>(memberService.updatePass(member), HttpStatus.OK);
+	}
+	
+	/**
 	 * 회원정보 변경
-	 * 사용자의 회원정보를 변경합니다. 비밀번호, 닉네임, 연락처, 프로필 사진 등을 변경합니다. 
+	 * 사용자의 회원정보를 변경합니다. 이름, 닉네임, 연락처, 프로필 사진 등을 변경합니다. 
 	 * @param member
 	 * @return true if data successfully updated, false if failed
 	 * @throws Exception

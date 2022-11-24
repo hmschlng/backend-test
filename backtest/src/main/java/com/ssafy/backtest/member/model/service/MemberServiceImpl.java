@@ -73,17 +73,12 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	@Override
+	public boolean updatePass(Member member) throws Exception {
+		return sqlSession.getMapper(MemberMapper.class).updatePass(member.getEmailId(), PasswordEncoder.getSha256Hashcode(member.getPass())) == 1;
+	}
+	@Override
 	public boolean updateMember(Member member) throws Exception {
-		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
-		String emailId = member.getEmailId();
-		if(member.getPass() != null) {
-			return mapper.updatePass(emailId, PasswordEncoder.getSha256Hashcode(member.getPass())) == 1;
-		} else if(member.getNickname() != null) {
-			return mapper.updateNickname(emailId, member.getNickname()) == 1;
-		} else if(member.getPhoneNumber() != null) {
-			return mapper.updatePhoneNumber(emailId, member.getPhoneNumber()) == 1;
-		} //else if(member.getImgOrigin() != null) {
-		else return false;
+		return sqlSession.getMapper(MemberMapper.class).updateMember(member) == 1;
 	}
 		
 }

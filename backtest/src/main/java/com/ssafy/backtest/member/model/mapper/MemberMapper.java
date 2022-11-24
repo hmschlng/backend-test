@@ -14,7 +14,6 @@ public interface MemberMapper {
 	int deleteMember(String emailId) throws SQLException;
 	Member loginMember(Member member) throws SQLException;
 	int updatePass(String emailId, String pass) throws SQLException;
-	int updateNickname(String emailId, String nickname) throws SQLException;
-	int updatePhoneNumber(String emailId, String phoneNumber) throws SQLException;
+	int updateMember(Member member) throws SQLException;
 	
 }

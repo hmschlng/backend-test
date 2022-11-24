@@ -10,6 +10,7 @@ public interface MemberService {
 	String checkEmailId(Member member) throws Exception;
 	boolean searchPw(String emailId) throws Exception;
 	boolean quit(Member member) throws Exception;
+	boolean updatePass(Member member) throws Exception;
 	boolean updateMember(Member member) throws Exception;
 
 }

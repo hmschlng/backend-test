@@ -45,15 +45,11 @@
 		where email_id = #{emailId}
 	</update>
 	
-	<update id="updateNickname" parameterType="map">
+	<update id="updateMember" parameterType="member">
 		update member
-		set nickname = #{nickname} 
-		where email_id = #{emailId}
-	</update>
-	
-	<update id="updatePhoneNumber" parameterType="map">
-		update member
-		set phone_number = #{phoneNumber} 
+		set name = #{name},
+			nickname = #{nickname},
+			phone_number = #{phoneNumber}
 		where email_id = #{emailId}
 	</update>
 	
